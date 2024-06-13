@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV to HTML Table</title>
+    <link rel="stylesheet" type="text/css" href="../Table/css/Table.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="nav-btn">
+                <div class="nav-btn1">
+                    <a href="../WebDevTC/เช็คเวลาเรียน.html" class="เวลาเข้าเรียน">เช็คเวลานักเรียน</a>
+                    </div>
+                <div class="nav-btn2">
+                    <a href="../WebDevTC/เกณฑ์เรียน.html" class="เกณฑ์การเรียน">เกณฑ์การเรียน</a>
+                    </div>
+                <div class="nav-btn3">
+                    <a href="../WebDevTC/คะแนน.html" class="คะแนนประจำวิชา">คะแนนนักเรียน</a>
+                    </div>
+                <div class="nav-btn4">
+                    <a href="../Q&A/สอบถามครู.html" class="สอบถาม">สอบถาม</a>
+                    </div>
+                </div>
+            </nav>
+    </header>
+
+    <h1>18 มิถุนายน 2567</h1>
+    <div id="tableContainer"></div>
+
+    <div class="background">
+        <div class="header-btn1">
+            <a href="../WebDevTC/เช็คเวลาเรียน.html" class="Back">Back</a>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const csvData = `
+Name,Time
+plng,00-41-53
+ingk 1,00-41-53
+cee,00-41-53
+bank,00-41-53
+            `;
+            const tableHtml = csvToTable(csvData);
+            document.getElementById('tableContainer').innerHTML = tableHtml;
+        });
+
+        function csvToTable(csv) {
+            const rows = csv.trim().split('\n');
+            let tableHtml = '<table>';
+            rows.forEach((row, rowIndex) => {
+                const cells = row.split(',');
+                if (rowIndex === 0) {
+                    tableHtml += '<thead><tr>';
+                    cells.forEach(cell => {
+                        tableHtml += `<th>${cell.trim()}</th>`;
+                    });
+                    tableHtml += '</tr></thead><tbody>';
+                } else {
+                    tableHtml += '<tr>';
+                    cells.forEach(cell => {
+                        tableHtml += `<td>${cell.trim()}</td>`;
+                    });
+                    tableHtml += '</tr>';
+                }
+            });
+            tableHtml += '</tbody></table>';
+            return tableHtml;
+        }
+    </script>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>Matthayom Wat Dusitaram School</h4>
+    </footer>
+</body>
+</html>
